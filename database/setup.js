@@ -7,15 +7,16 @@ async function setup() {
       filename: './database/mydb.sqlite',
       driver: sqlite3.Database
     })
-
-    return db
+    
+    await db.migrate({
+      force: 'last',
+      migrationsPath: './database/migrations'
+    })
+    
+    console.log('Database Started.')
   } catch(catchedError) {
     console.log('Database Error:', catchedError.message)
   }
 }
 
-const db = setup()
-
-module.exports = {
-  open: () => db
-}
+setup()
