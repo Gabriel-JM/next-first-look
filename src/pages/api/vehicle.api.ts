@@ -3,7 +3,7 @@ import connection from '../../../database/connection'
 
 async function getAllVehicles(req: NextApiRequest, res: NextApiResponse) {
   const db = await connection.open()
-  const vehicles = await db?.all('select * from vehicles')
+  const vehicles = await db?.all('select * from vehicle')
 
   res.json(vehicles)
 }
