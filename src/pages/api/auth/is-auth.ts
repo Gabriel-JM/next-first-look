@@ -5,8 +5,8 @@ import { secretKey } from '../../../../api/secret'
 export function authenticated(fn: NextApiHandler) {
   return async (req: NextApiRequest, res: NextApiResponse) => {
     try {
-      const { authorization = '' } = req.headers
-      jwt.verify(authorization.slice(7), secretKey)
+      const { auth = '' } = req.cookies
+      jwt.verify(auth, secretKey)
 
       return await fn(req, res)
     } catch(catchedError) {
